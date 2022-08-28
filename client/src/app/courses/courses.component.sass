@@ -1,0 +1,107 @@
+$x-small: 750px
+$small: 903px
+$medium: 1030px
+$large: 1435px
+
+.courses-page
+  display: flex
+  justify-content: space-between
+  background-color: #515757
+
+.courses-component
+  width: 79%
+  user-select: none
+  display: grid
+  grid-template-columns: repeat(4, auto)
+  grid-auto-rows: 100px
+  gap: 2vh 1vw
+  @media screen and ( max-width: $large)
+    grid-template-columns: repeat(3, auto)
+    width: 70%
+  @media screen and ( max-width: $medium)
+    width: 60%
+    grid-template-columns: repeat(2, auto)
+  @media screen and ( max-width: $small)
+    grid-template-columns: auto
+  @media screen and ( max-width: $x-small)
+    width: 50%
+  :nth-child(1)
+    grid-column: span 1
+    grid-row: span 2
+  :nth-child(4n)
+    grid-column: span 1
+    grid-row: span 2
+  .course-card
+    color: #ebebeb
+    background-color: #353b3b
+    position: relative
+    min-width: 200px
+    .mat-card-title
+      font-size: 1.25rem
+    .mat-card-subtitle
+      color: #dbd9d9
+    &:hover
+      box-shadow: inset 0px 0px 0px 2px #437851
+      cursor: pointer
+    &.selected
+      background-color: #437851
+      transition: background-color 300ms linear
+
+.toolbar
+  width: 20%
+  min-width: 285px
+  background: #353b3b
+  color: #ebebeb
+  border-radius: 4px
+  @media screen and ( max-width: $large)
+    width: 28%
+  @media screen and ( max-width: $medium)
+    width: 38%
+  @media screen and ( max-width: $x-small)
+    width: 48%
+  .info
+    padding: 2vh 1vw
+    color: #ebebeb!important
+    display: flex
+    justify-content: space-around
+    flex-direction: column
+    p span
+      font-weight: bold
+  .estimated-study
+    p span
+      color: #c2185b
+  .buttons
+    display: flex
+    justify-content: space-around
+
+.history
+  display: block
+  overflow-y: auto
+  max-height: 45vh
+  .accordion-item
+    display: block
+    border: solid 1px #ccc
+  .accordion-item + .accordion-item
+    border-top: none
+  .accordion-item-header
+    display: flex
+    align-content: center
+    justify-content: space-between
+    &:hover
+      color: #353b3b
+  .accordion-item-description
+    font-size: 0.85em
+    color: #999
+  .accordion-item-header,.accordion-item-body
+    padding: 16px
+  .accordion-item-header:hover
+    cursor: pointer
+    background-color: #eee
+  .accordion-item:first-child
+    border-top-left-radius: 4px
+    border-top-right-radius: 4px
+  .accordion-item:last-child
+    border-bottom-left-radius: 4px
+    border-bottom-right-radius: 4px
+  .accordion-item-body span
+    display: block
