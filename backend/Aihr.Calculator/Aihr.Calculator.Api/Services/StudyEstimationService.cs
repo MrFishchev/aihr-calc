@@ -1,3 +1,4 @@
+using System.Security.Principal;
 using Aihr.Calculator.Api.Models;
 using Aihr.Calculator.Common.Models;
 
@@ -24,14 +25,16 @@ public class StudyEstimationService : IStudyEstimationService
         
         var totalDuration = study.Courses.Select(x => x.Duration).Sum();
         var availableTime = study.EndDate - study.StartDate;
-        var hoursPerDay = totalDuration / availableTime.TotalDays;
+        var hoursPerDay = totalDuration / Math.Max(availableTime.TotalDays, 1);
 
-        if (totalDuration <= MaxHoursPerWeek)
+        // selected study range and total duration are less than one week
+        if (totalDuration <= MaxHoursPerWeek && availableTime.TotalDays / DaysPerWeek <= 1)
         {
-            return EstimatedStudyTime.SingleWeek(hoursPerWeek: totalDuration);
+            return EstimatedStudyTime.SingleWeek(hoursPerWeek: totalDuration, (int)Math.Ceiling(hoursPerDay));
         }
 
         var hoursPerWeek = (int)Math.Ceiling(hoursPerDay * DaysPerWeek); // 2.3 hours will be 3 hours at the end
+        
         var weeks = (int)Math.Ceiling((double)totalDuration / MaxHoursPerWeek);
 
         if (hoursPerWeek > MaxHoursPerWeek)
@@ -42,6 +45,6 @@ public class StudyEstimationService : IStudyEstimationService
         _logger.LogDebug("Estimated time for {CoursesCount} with {Duration}: {EstimatedTime}",
             study.Courses.Count, totalDuration, hoursPerWeek);
         
-        return new EstimatedStudyTime(weeks: weeks, hoursPerWeek: hoursPerWeek);
+        return new EstimatedStudyTime(weeks, hoursPerWeek, (int)Math.Ceiling(hoursPerDay));
     }
 }

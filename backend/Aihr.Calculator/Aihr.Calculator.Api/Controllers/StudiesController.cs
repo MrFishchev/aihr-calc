@@ -33,15 +33,8 @@ public class StudiesController : ControllerBase
 
     [HttpPost]
     [Consumes(MediaTypeNames.Application.Json)]
-    public async Task<IActionResult> AddStudy(Study study, CancellationToken cancellationToken)
+    public async Task<IActionResult> AddStudy([FromBody] Study study, CancellationToken cancellationToken)
     {
-        if (string.IsNullOrWhiteSpace(study.Id))
-        {
-            _logger.LogInformation("Study's id is null or empty in {Request} request",
-                HttpContext.TraceIdentifier);
-            return BadRequest();
-        }
-
         if (!study.Courses.Any())
         {
             _logger.LogInformation("Study does not contain any courses in {Request} request",
@@ -61,7 +54,7 @@ public class StudiesController : ControllerBase
             var estimateStudyTime = _studyEstimationService.EstimateHoursPerWeek(study);
             study.HoursPerWeek = estimateStudyTime.HoursPerWeek;
             await _studiesProvider.AddStudyAsync(study, cancellationToken);
-            return Ok();
+            return Ok(estimateStudyTime);
         }
         catch (Exception ex)
         {

@@ -9,7 +9,7 @@ public class Course
 {
     [DynamoDBHashKey("id")]
     [JsonPropertyName("id")]
-    public string Id { get; set; } = null!;
+    public string? Id { get; set; }
 
     [DynamoDBProperty("name")]
     [JsonPropertyName("name")]

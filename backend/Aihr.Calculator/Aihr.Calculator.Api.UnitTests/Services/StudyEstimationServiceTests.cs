@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Aihr.Calculator.Api.Models;
 using Aihr.Calculator.Api.Services;
 using Aihr.Calculator.Common.Models;
 using Microsoft.Extensions.Logging.Abstractions;
@@ -37,25 +36,7 @@ public class StudyEstimationServiceTests
     }
 
     [Fact]
-    public void EstimateHoursPerWeek_WhenCalled_ReturnsExpectedResult()
-    {
-        _study.Courses = new List<Course>
-        {
-            new() { Id = "1", Duration = 1, Name = "1" },
-            new() { Id = "2", Duration = 10, Name = "1" },
-            new() { Id = "3", Duration = 20, Name = "1" },
-            new() { Id = "4", Duration = 30, Name = "1" },
-            new() { Id = "5", Duration = 40, Name = "1" },
-        };
-        var totalDuration = GetSelectedCoursesDuration(_study);
-
-        var result = _sut.EstimateHoursPerWeek(_study);
-        
-        ValidateHoursPerWeek(result, totalDuration);
-    }
-    
-    [Fact]
-    public void EstimateHoursPerWeek_SelectedRangeShorterThanWeek_ReturnsExpectedResult()
+    public void EstimateHoursPerWeek_SelectedRangeShorterThanWeek_ReturnsCoursesDuration()
     {
         _study.EndDate = DateTime.UtcNow.AddDays(4);
         _study.Courses = new List<Course>
@@ -69,8 +50,11 @@ public class StudyEstimationServiceTests
         var totalDuration = GetSelectedCoursesDuration(_study);
 
         var result = _sut.EstimateHoursPerWeek(_study);
-        
-       ValidateHoursPerWeek(result, totalDuration);
+
+        var selectedRange = _study.EndDate - _study.StartDate;
+        result.Weeks.Should().Be(1);
+        result.HoursPerWeek.Should().Be(totalDuration);
+        result.HoursPerDay.Should().BeCloseTo((int)(totalDuration / selectedRange.TotalDays), 1);
     }
     
     [Fact]
@@ -85,19 +69,29 @@ public class StudyEstimationServiceTests
 
         var result = _sut.EstimateHoursPerWeek(_study);
         
-        ValidateHoursPerWeek(result, totalDuration);
+        result.Weeks.Should().Be(1);
+        result.HoursPerWeek.Should().Be(totalDuration);
+        result.HoursPerDay.Should().Be(1);
+    }
+    
+    [Fact]
+    public void EstimateHoursPerWeek_OneDayRangeSelected_ReturnsTotalDurationPerWeekAndHour()
+    {
+        _study.EndDate = DateTime.UtcNow;
+        _study.Courses = new List<Course>
+        {
+            new() { Id = "1", Duration = 2, Name = "1" },
+            new() { Id = "2", Duration = 3, Name = "2" },
+        };
+        
+        var result = _sut.EstimateHoursPerWeek(_study);
+        
+        result.Weeks.Should().Be(1);
+        result.HoursPerWeek.Should().Be(5);
+        result.HoursPerDay.Should().Be(5);
     }
 
     #region Private Methods
-
-    private static void ValidateHoursPerWeek(
-        EstimatedStudyTime estimatedStudyTime,
-        int totalDuration)
-    {
-        var totalTimeToStudy = estimatedStudyTime.Weeks * estimatedStudyTime.HoursPerWeek;
-        var deltaTime = totalTimeToStudy - totalDuration;
-        deltaTime.Should().Be(0);
-    }
 
     private static int GetSelectedCoursesDuration(Study study)
     {

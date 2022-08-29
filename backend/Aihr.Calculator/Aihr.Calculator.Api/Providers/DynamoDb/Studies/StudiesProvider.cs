@@ -20,6 +20,10 @@ public class StudiesProvider : IStudiesProvider
 
     public async Task AddStudyAsync(Study study, CancellationToken cancellationToken)
     {
+        if (string.IsNullOrWhiteSpace(study.Id))
+        {
+            study.Id = Guid.NewGuid().ToString();
+        }
         await _dynamoDb.SaveAsync(study, cancellationToken);
     }
 }

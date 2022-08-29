@@ -7,7 +7,6 @@ using System.Net.Mime;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Aihr.Calculator.Api.Models;
 using Aihr.Calculator.Common.Models;
 using Amazon.DynamoDBv2.DataModel;
 using FluentAssertions;
@@ -81,26 +80,6 @@ public class StudiesControllerTests : IClassFixture<MockedApp>, IAsyncDisposable
 
     #region AddStudy
 
-    [Theory]
-    [InlineData(null)]
-    [InlineData("")]
-    [InlineData(" ")]
-    public async Task AddStudy_IdEmptyOrWhiteSpace_ReturnsBadRequest(string id)
-    {
-        var study = new Study
-        {
-            Id = id,
-            Courses = new List<Course> { _course },
-            StartDate = DateTime.UtcNow,
-            EndDate = DateTime.UtcNow.AddDays(1)
-        };
-
-        var response = await _httpClient.PostAsync(StudiesController, 
-                new StringContent(JsonSerializer.Serialize(study), Encoding.UTF8, MediaTypeNames.Application.Json));
-
-        response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
-    }
-    
     [Fact]
     public async Task AddStudy_CoursesAreEmpty_ReturnsBadRequest()
     {
@@ -144,6 +123,7 @@ public class StudiesControllerTests : IClassFixture<MockedApp>, IAsyncDisposable
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
         var createdStudy = await _dynamoDbContext.LoadAsync<Study>(_study.Id);
+        createdStudy.Should().NotBeNull();
         createdStudy.Courses.Should().BeEquivalentTo(_study.Courses);
         createdStudy.Id.Should().BeEquivalentTo(_study.Id);
         createdStudy.EndDate.Should().BeCloseTo(_study.EndDate, TimeSpan.FromMilliseconds(100));
