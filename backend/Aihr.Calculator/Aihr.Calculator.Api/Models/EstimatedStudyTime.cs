@@ -1,5 +1,8 @@
 namespace Aihr.Calculator.Api.Models;
 
+/// <summary>
+/// Handles response to a client with estimated study time
+/// </summary>
 public record EstimatedStudyTime
 {
     /// <summary>
@@ -7,6 +10,9 @@ public record EstimatedStudyTime
     /// </summary>
     public int Weeks { get; }
 
+    /// <summary>
+    /// Indicated how many hours per week (number of days, not a calendar week) client should study 
+    /// </summary>
     public int HoursPerWeek { get; }
 
     /// <summary>

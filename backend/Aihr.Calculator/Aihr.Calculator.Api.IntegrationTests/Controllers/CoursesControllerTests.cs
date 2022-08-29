@@ -4,7 +4,6 @@ using System.Net;
 using System.Net.Http;
 using System.Text.Json;
 using System.Threading.Tasks;
-using Aihr.Calculator.Api.Models;
 using Aihr.Calculator.Common.Models;
 using Amazon.DynamoDBv2.DataModel;
 using FluentAssertions;

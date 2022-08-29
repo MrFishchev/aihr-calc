@@ -1,4 +1,3 @@
-using System.Security.Principal;
 using Aihr.Calculator.Api.Models;
 using Aihr.Calculator.Common.Models;
 

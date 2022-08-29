@@ -1,4 +1,3 @@
-using Aihr.Calculator.Api.Models;
 using Aihr.Calculator.Common.Models;
 using Amazon.DynamoDBv2.DataModel;
 

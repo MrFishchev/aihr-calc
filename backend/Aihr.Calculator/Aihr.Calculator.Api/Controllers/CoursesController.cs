@@ -1,4 +1,3 @@
-using Aihr.Calculator.Api.Models;
 using Aihr.Calculator.Api.Providers.DynamoDb;
 using Aihr.Calculator.Common.Models;
 using Microsoft.AspNetCore.Mvc;
