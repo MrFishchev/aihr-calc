@@ -45,15 +45,17 @@
           when you have not full-week range selected)
         </p>
       </div>
+    </div>
 
-      <!-- History -->
+    <!-- History -->
+    <div class="history" [ngClass]="{'smaller': estimatedStudyTime}">
       <h4>History:</h4>
-      <cdk-accordion class="history">
+      <cdk-accordion class="history-accordion">
         <cdk-accordion-item *ngFor="let study of studies; let index = index;" #accordionItem="cdkAccordionItem"
           class="accordion-item" role="button" tabindex="0" [attr.id]="'accordion-header-' + index"
           [attr.aria-expanded]="accordionItem.expanded" [attr.aria-controls]="'accordion-body-' + index">
           <div class="accordion-item-header" (click)="accordionItem.toggle()">
-            {{ study.courses.length }} courses of {{study.hoursPerWeek}} hr/w
+            <span>{{ study.courses.length }}</span> courses of <span>{{study.hoursPerWeek}}</span> hr/w
             <span class="accordion-item-description">
               Click to {{ accordionItem.expanded ? 'close' : 'open' }}
             </span>
@@ -65,8 +67,7 @@
           </div>
         </cdk-accordion-item>
       </cdk-accordion>
-
     </div>
-  </div>
 
+  </div>
 </div>

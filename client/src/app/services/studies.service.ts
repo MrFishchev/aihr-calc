@@ -25,7 +25,7 @@ export class StudiesService {
 
   constructor(private http: HttpClient) { }
 
-  getStuies(): Observable<Study[]> {
+  getStudies(): Observable<Study[]> {
     return this.http.get<Study[]>(this.studiesApi)
       .pipe(catchError(this.errorHandler));
   }

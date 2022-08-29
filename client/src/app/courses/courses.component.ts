@@ -3,6 +3,7 @@ import { CoursesService, Course } from '../services/courses.service';
 import { StudiesService, Study, EstimatedStudyTime } from '../services/studies.service';
 import { FormGroup, FormControl } from '@angular/forms';
 import { DatePipe } from '@angular/common';
+import { switchMap } from 'rxjs/operators';
 
 @Component({
   selector: 'app-courses',
@@ -29,7 +30,7 @@ export class CoursesComponent implements OnInit {
   ngOnInit(): void {
     this.coursesService.getCourses()
       .subscribe(result => this.courses = result);
-    this.studiesService.getStuies()
+    this.studiesService.getStudies()
       .subscribe(result => this.studies = result);
   }
 
@@ -61,7 +62,11 @@ export class CoursesComponent implements OnInit {
     }
 
     this.studiesService.estimateStudyTime(study as Study)
-      .subscribe(result => this.estimatedStudyTime = result);
+      .subscribe(result => {
+        this.estimatedStudyTime = result
+        this.studiesService.getStudies()
+          .subscribe(result => this.studies = result);
+      });
   }
 
   clear(): void {
