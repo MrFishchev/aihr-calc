@@ -1,5 +1,4 @@
 using System.Net.Mime;
-using Aihr.Calculator.Api.Models;
 using Aihr.Calculator.Api.Providers.DynamoDb;
 using Aihr.Calculator.Api.Services;
 using Aihr.Calculator.Common.Models;
@@ -26,14 +25,21 @@ public class StudiesController : ControllerBase
     }
 
     [HttpGet]
-    public async Task<List<Study>> GetAll(CancellationToken cancellationToken)
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [Produces(MediaTypeNames.Application.Json)]
+    public async Task<List<Study>> GetAll(CancellationToken cancellationToken = default)
     {
         return await _studiesProvider.GetAllStudiesAsync(cancellationToken);
     }
 
     [HttpPost]
     [Consumes(MediaTypeNames.Application.Json)]
-    public async Task<IActionResult> AddStudy([FromBody] Study study, CancellationToken cancellationToken)
+    [Produces(MediaTypeNames.Application.Json)]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+    public async Task<IActionResult> CalculateStudyTime(
+        [FromBody] Study study, 
+        CancellationToken cancellationToken = default)
     {
         if (!study.Courses.Any())
         {

@@ -13,8 +13,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aihr.Calculator.Api.Integra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aihr.Calculator.Common", "Aihr.Calculator.Common\Aihr.Calculator.Common.csproj", "{F9753868-758C-495F-99E8-F37793A6CE09}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aihr.Calculator.Api.Tests.Common", "Aihr.Calculator.Api.Tests.Common\Aihr.Calculator.Api.Tests.Common.csproj", "{AA8ED1AB-CA2B-4B97-AAB7-2A570AD4E309}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aihr.Calculator.Api.UnitTests", "Aihr.Calculator.Api.UnitTests\Aihr.Calculator.Api.UnitTests.csproj", "{15D86924-423A-4144-9D4A-B6F490609265}"
 EndProject
 Global
@@ -35,10 +33,6 @@ Global
 		{F9753868-758C-495F-99E8-F37793A6CE09}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F9753868-758C-495F-99E8-F37793A6CE09}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F9753868-758C-495F-99E8-F37793A6CE09}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA8ED1AB-CA2B-4B97-AAB7-2A570AD4E309}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA8ED1AB-CA2B-4B97-AAB7-2A570AD4E309}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA8ED1AB-CA2B-4B97-AAB7-2A570AD4E309}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA8ED1AB-CA2B-4B97-AAB7-2A570AD4E309}.Release|Any CPU.Build.0 = Release|Any CPU
 		{15D86924-423A-4144-9D4A-B6F490609265}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{15D86924-423A-4144-9D4A-B6F490609265}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{15D86924-423A-4144-9D4A-B6F490609265}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -46,7 +40,6 @@ Global
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{48EE2C04-9196-4615-96E0-821F690D1792} = {777D81BD-5F75-4718-B35E-45CA9641AD1B}
-		{AA8ED1AB-CA2B-4B97-AAB7-2A570AD4E309} = {777D81BD-5F75-4718-B35E-45CA9641AD1B}
 		{15D86924-423A-4144-9D4A-B6F490609265} = {777D81BD-5F75-4718-B35E-45CA9641AD1B}
 	EndGlobalSection
 EndGlobal

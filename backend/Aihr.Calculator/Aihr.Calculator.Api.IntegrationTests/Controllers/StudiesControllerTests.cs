@@ -81,7 +81,7 @@ public class StudiesControllerTests : IClassFixture<MockedApp>, IAsyncDisposable
     #region AddStudy
 
     [Fact]
-    public async Task AddStudy_CoursesAreEmpty_ReturnsBadRequest()
+    public async Task CalculateStudyTime_CoursesAreEmpty_ReturnsBadRequest()
     {
         var study = new Study
         {
@@ -98,7 +98,7 @@ public class StudiesControllerTests : IClassFixture<MockedApp>, IAsyncDisposable
     }
     
     [Fact]
-    public async Task AddStudy_StartDateBiggerThanEndDate_ReturnsBadRequest()
+    public async Task CalculateStudyTime_StartDateBiggerThanEndDate_ReturnsBadRequest()
     {
         var study = new Study
         {
@@ -115,7 +115,7 @@ public class StudiesControllerTests : IClassFixture<MockedApp>, IAsyncDisposable
     }
 
     [Fact]
-    public async Task AddStudy_WhenCalled_AddsValidEntityToDb()
+    public async Task CalculateStudyTime_WhenCalled_AddsValidEntityToDb()
     {
         await _dynamoDbContext.DeleteAsync<Study>(_study.Id);
         var response = await _httpClient.PostAsync(StudiesController, 
