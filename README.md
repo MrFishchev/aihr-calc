@@ -37,3 +37,6 @@ The project allows to estimate, how many hours per week you need to spend to fin
 - **Cloud Provider:** Localstack
 - **Testing:** Integration & UnitTests
 - **Initial Data:** loading by `backend/localstack/setup-localstack.sh`
+
+### Screenshot:
+![Screenshot of FE UI](img/example.gif?raw=true "Screenshot of FE UI")
