@@ -12,3 +12,15 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
       - ./backend/localstack/setup-localstack.sh:/etc/localstack/init/ready.d/init_dynamodb.sh
+  aihr-backend:
+    container_name: aihr-backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Productions
+      - ASPNETCORE_URLS=http://+:8000
+    ports:
+      - 8000:8000
+    depends_on:
+      - aihr-localstack

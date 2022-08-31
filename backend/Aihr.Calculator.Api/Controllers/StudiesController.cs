@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Aihr.Calculator.Api.Controllers;
 
 [ApiController]
-[Route("{controller}")]
+[Route("[controller]")]
 public class StudiesController : ControllerBase
 {
     private readonly IStudiesProvider _studiesProvider;

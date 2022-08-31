@@ -2,11 +2,6 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aihr.Calculator.Api", "Aihr.Calculator.Api\Aihr.Calculator.Api.csproj", "{68C9107A-E612-4376-ABA2-D52AE2839DDC}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{9304D5DD-44FE-409D-BD1C-B2D57150D374}"
-	ProjectSection(SolutionItems) = preProject
-		docker-compose.yml = docker-compose.yml
-	EndProjectSection
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{777D81BD-5F75-4718-B35E-45CA9641AD1B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Aihr.Calculator.Api.IntegrationTests", "Aihr.Calculator.Api.IntegrationTests\Aihr.Calculator.Api.IntegrationTests.csproj", "{48EE2C04-9196-4615-96E0-821F690D1792}"

@@ -6,10 +6,17 @@ The project allows to estimate, how many hours per week you need to spend to fin
 > Unfortunately, I was not able to create `docker-compose` for a client part, nginx didn't want to proxy requests to backend. I spent two evening on it, so it feels like not the best place for such efforts (I'm not Angular expert for now).
 
 ## Get Started
-1. `docker-compose up -d` will run BE and populate initial data in localstack
+1. `docker-compose -f docker-compose-all.yml up -d` will run BE and populate initial data in localstack
 2. `cd client` && `npm i`
 3. `npm run start` will run project with proxy and run http://localhost:4200
 4. Now you can play with it.
+
+> Warning! <br/>
+> If you don't see any data in dynamodb (or backend), try to `chmod +x backend/localstack/setup-localstack.sh`
+
+## How to run Tests
+1. `docker-compose up -d` will run localstack (no in-memory db option here)
+2. Run all the tests from solution.
 
 > Everything has been tested with `Safari` browser only.
 
